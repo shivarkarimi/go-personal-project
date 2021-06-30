@@ -17,6 +17,16 @@ func GetUsers() []*User {
 	return users
 }
 
+func GetUserByID(id int) (User, error) {
+	for _, u := range users {
+		if u.ID == id {
+			return *u, nil
+		}
+	}
+
+	return User{}, fmt.Errorf("User with ID '%v  not found", id)
+}
+
 func AddUser(u User) (User, error) {
 	u.ID = int(nextID)
 	nextID++
